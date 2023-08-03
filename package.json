@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-lambda-test",
+  "version": "1.0.0",
+  "description": "A simple test to deploy and use a Node.js Lambda function on AWS using ESM",
+  "exports": "./index.js",
+  "type": "module",
+  "config": {
+    "name": "hello-lambda",
+    "role": "arn:aws:iam::244160873794:role/lambda-execution-basic",
+    "runtime": "nodejs18.x"
+  },
+  "scripts": {
+    "create-dist": "zip ./dist/hello-lambda.zip index.js package.json",
+    "create-lambda": "aws lambda create-function --function-name $npm_package_config_name --runtime $npm_package_config_runtime --handler index.handler --role $npm_package_config_role --zip-file fileb://dist/hello-lambda.zip",
+    "update-lambda": "aws lambda update-function-code --function-name $npm_package_config_name --zip-file fileb://dist/hello-lambda.zip",
+    "invoke-lambda": "aws lambda invoke --function-name $npm_package_config_name --cli-binary-format raw-in-base64-out ./test-output/response.json",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "author": "tsmx <dev@tsmx.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.6.2"
+  }
+}
