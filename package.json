@@ -18,6 +18,20 @@
   },
   "author": "tsmx <dev@tsmx.net>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsmx/nodejs-lambda-test.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "ESM",
+    "AWS",
+    "AWS CLI",
+    "Lambda",
+    "serverless",
+    "deploy",
+    "update"
+  ],
   "devDependencies": {
     "jest": "^29.6.2"
   }
