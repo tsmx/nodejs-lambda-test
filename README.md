@@ -11,7 +11,7 @@ To follow along the tutorial you'll need up & running...
 
 ## The Lambda function
 
-The function itself is defined in `index.js` and called ["handler"](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html) in the AWS lambda terminology..
+The function itself is defined in `index.js` and called [handler](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html) in the AWS Lambda terminology..
 
 ```js
 export const handler = async (event, context) => {
