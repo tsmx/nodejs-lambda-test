@@ -1,5 +1,5 @@
 # Creating an AWS Lambda function with Node.js
 
-> Tutorial showing how to create an AWS Lambda function written in Node.js as ESM using either pure AWS-SDK CLI commands or containerization with Docker. 
+> Tutorial for creating an AWS Lambda function in Node.js (ESM) and deployment using pure code upload or a Docker-image using the AWS-SDK CLI.
 
 This site is under construction...
