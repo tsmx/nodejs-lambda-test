@@ -6,14 +6,25 @@
   "type": "module",
   "config": {
     "name": "hello-lambda",
+    "name-docker": "hello-lambda-docker",
     "role": "arn:aws:iam::244160873794:role/lambda-execution-basic",
-    "runtime": "nodejs18.x"
+    "runtime": "nodejs18.x",
+    "account": "244160873794",
+    "region": "eu-central-1"
   },
   "scripts": {
     "create-dist": "zip ./dist/hello-lambda.zip index.js package.json",
     "create-lambda": "aws lambda create-function --function-name $npm_package_config_name --runtime $npm_package_config_runtime --handler index.handler --role $npm_package_config_role --zip-file fileb://dist/hello-lambda.zip",
     "update-lambda": "aws lambda update-function-code --function-name $npm_package_config_name --zip-file fileb://dist/hello-lambda.zip",
+    "aws-registry-login": "aws ecr get-login-password --region $npm_package_config_region | docker login --username AWS --password-stdin $npm_package_config_account.dkr.ecr.$npm_package_config_region.amazonaws.com",
+    "aws-registry-create-repo": "aws ecr create-repository --repository-name lambda-test --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE",
+    "build-image": "docker build -t hello-lambda .",
+    "tag-aws-image": "docker tag hello-lambda:latest $npm_package_config_account.dkr.ecr.$npm_package_config_region.amazonaws.com/lambda-test:latest",
+    "push-aws-image": "docker push $npm_package_config_account.dkr.ecr.$npm_package_config_region.amazonaws.com/lambda-test:latest",
+    "create-lambda-from-image": "aws lambda create-function --function-name $npm_package_config_name-docker --package-type Image --code ImageUri=$npm_package_config_account.dkr.ecr.$npm_package_config_region.amazonaws.com/lambda-test:latest --role $npm_package_config_role",
+    "update-lambda-from-image": "aws lambda update-function-code --function-name $npm_package_config_name-docker --image-uri $npm_package_config_account.dkr.ecr.$npm_package_config_region.amazonaws.com/lambda-test:latest",
     "invoke-lambda": "aws lambda invoke --function-name $npm_package_config_name --cli-binary-format raw-in-base64-out ./test-output/response.json",
+    "invoke-lambda-from-image": "aws lambda invoke --function-name $npm_package_config_name-docker --cli-binary-format raw-in-base64-out ./test-output/response.json",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "author": "tsmx <dev@tsmx.net>",
