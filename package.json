@@ -1,7 +1,7 @@
 {
   "name": "nodejs-lambda-test",
   "version": "1.0.0",
-  "description": "A simple test to deploy and use a Node.js Lambda function on AWS using ESM",
+  "description": "Tutorial on how to an AWS Lambda function using Node.js with ESM",
   "exports": "./index.js",
   "type": "module",
   "config": {
