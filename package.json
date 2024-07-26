@@ -8,7 +8,7 @@
     "name": "hello-lambda",
     "name-docker": "hello-lambda-docker",
     "role": "arn:aws:iam::244160873794:role/lambda-execution-basic",
-    "runtime": "nodejs18.x",
+    "runtime": "nodejs20.x",
     "account": "244160873794",
     "region": "eu-central-1"
   },
